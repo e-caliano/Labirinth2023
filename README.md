@@ -1,1 +1,1 @@
-# Labirinth2023
+# Labyrinth2023
