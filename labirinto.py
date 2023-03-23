@@ -108,6 +108,10 @@ class Labirinto:
 
 
     def json_to_image(self):
+        """
+        Dal file json viene restituita l'immagine
+        :return:
+        """
         # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
         self.image = Image.new("RGB", (len(self.maze[0]), len(self.maze)))
         pixels = self.image.load()
@@ -135,6 +139,10 @@ class Labirinto:
         self.image.show()
 
     def labirinto_from_image(self):
+        """
+        Dall'immagine, fornita nei diversi formati TIFF, JPEG o PNG, viene restituito il labirinto
+        :return:
+        """
         # apre l'immagine e ottiene i dati dei pixel
         pixel = self.image.load()
         larghezza, altezza = self.image.size
