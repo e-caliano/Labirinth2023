@@ -105,3 +105,91 @@ class Labirinto:
 
         self.json_to_image()
         print(self.maze)
+
+
+    def json_to_image(self):
+        # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
+        self.image = Image.new("RGB", (len(self.maze[0]), len(self.maze)))
+        pixels = self.image.load()
+        # Impostazione dei pixel dell'immagine in base alla matrice del labirinto
+        for i in range(len(self.maze)):
+            for j in range(len(self.maze[0])):
+                if self.maze[i][j] == 0:
+                    # imposto il muro inizializzato a 0
+                    pixels[j, i] = (0, 0, 0)  # muro = nero
+                    # imposto il cammino inizializzato a 1
+                elif self.maze[i][j] == 1:
+                    pixels[j, i] = (255, 255, 255)  # cammino = bianco
+                else:
+                    # imposto il cammino pesato
+                    pixels[j, i] = ((self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16)  # cammino pesato = grigio scuro
+        # imposto l'inizio e la fine del labirinto
+        i = self.end[0]
+        j = self.end[1]
+        pixels[j, i] = (255, 0, 0)  # arrivo = rosso
+        for st in self.start:
+            i = st[0]
+            j = st[1]
+            pixels[j, i] = (0, 255, 0)  # partenza = verde
+        #Mostro l'immagine
+        self.image.show()
+
+    def labirinto_from_image(self):
+        # apre l'immagine e ottiene i dati dei pixel
+        pixel = self.image.load()
+        larghezza, altezza = self.image.size
+
+        # inizializza la matrice del labirinto
+        labirinto = []
+        for i in range(altezza):
+            labirinto.append([0] * larghezza)
+
+        # analizzo i pixel dell'immagine e costruisco la matrice del labirinto
+        for y in range(altezza):
+            for x in range(larghezza):
+                r, g, b = pixel[x, y]
+                # pixel nero = muro = 0
+                if r == 0 and g == 0 and b == 0:
+                    labirinto[y][x] = 0
+                # pixel bianco, verde o rosso = posizione attraversabile = 1
+                elif r == 255 and g == 255 and b == 255 or r == 0 and g == 255 and b == 0 or r == 255 and g == 0 and b == 0:
+                    labirinto[y][x] = 1
+                # pixel grigio = casella con costo
+                else:
+                    # determina il valore del pixel in scala di grigi
+                    valore_grigio = int(round(0.2989 * r + 0.5870 * g + 0.1140 * b))
+                    # determina il costo associato al valore del pixel
+                    if valore_grigio == 16:
+                        costo = 1
+                    elif valore_grigio == 32:
+                        costo = 2
+                    elif valore_grigio == 48:
+                        costo = 3
+                    elif valore_grigio == 64:
+                        costo = 4
+                    elif valore_grigio == 80:
+                        costo = 5
+                    elif valore_grigio == 96:
+                        costo = 6
+                    elif valore_grigio == 112:
+                        costo = 7
+                    elif valore_grigio == 128:
+                        costo = 8
+                    elif valore_grigio == 144:
+                        costo = 9
+                    elif valore_grigio == 160:
+                        costo = 10
+                    elif valore_grigio == 176:
+                        costo = 11
+                    elif valore_grigio == 192:
+                        costo = 12
+                    elif valore_grigio == 208:
+                        costo = 13
+                    elif valore_grigio == 224:
+                        costo = 14
+                    elif valore_grigio == 240:
+                        costo = 15
+                    else:
+                        raise ValueError("Valore di grigio non valido")
+                    labirinto[y][x] = costo + 1 # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
+        self.maze = labirinto
