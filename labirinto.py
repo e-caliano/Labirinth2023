@@ -7,7 +7,10 @@ class Labirinto:
     """
     costruttore della classe labirinto
     """
-    def __init__(self):
+    def __init__(self, percorso_file=None):
+        # impostazione della directory "indata" che contiene i casi di test
+        self.percorso_file = percorso_file
+        self.data_dir = os.path.join(os.path.dirname(__file__), 'indata')
         # matrice che ospiterà il labirinto
         self.maze = []
         # matrice che ospiterà i punti di partena
@@ -17,34 +20,46 @@ class Labirinto:
         # immagine che conterrà l'immagine del labirinto
         self.image = None
 
+        if self.percorso_file is not None:
+            self.file_path = os.path.join(self.data_dir, self.percorso_file)
+        else:
+            self.file_path = None
 
-    def gestisci_input(self, percorso_file):
+
+    def gestisci_input(self):
         """
         metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
         se il file è di tipo immagine allora dovrò chiamare un metodo che crea un'istanza del labirinto a partire dall'immagine.
         :return: none
         """
+        if self.file_path is None:
+            raise ValueError("File name not specified")
+
+        if not os.path.exists(self.file_path):
+            raise FileNotFoundError(f"File not found: {self.file_path}")
         # estrae il nome del file e l'estensione
-        nome_file, estensione = os.path.splitext(percorso_file)
+        estensione = self.percorso_file.split(".")[-1].lower()
 
         # controllo l'estensione ed eseguo l'azione appropriata
-        if estensione == '.json':
+        if estensione == 'json':
             # carico il labirinto dal file JSON
-            with open(percorso_file) as json_file:
+            with open(self.file_path) as json_file:
                 data = json.load(json_file)
-            self.json_to_maze(data)
+            self.labirinto_from_json(data)
         # controllo che l'estensione sia di tipo TIFF, JPEG O PNG
-        elif estensione in ['.tiff', '.jpeg', '.png']:
+        elif estensione in ['tiff', 'jpeg', 'png']:
             # carico il labirinto dall'immagine
-            self.image = Image.open(percorso_file)
-            self.image_to_maze()
+            self.image = Image.open(self.file_path)
+            self.labirinto_from_image()
         # in tutti gli altri casi non devo supportare l'estensione
         else:
             # gestione dell'errore se l'estensione non è supportata
             print("Estensione del file non supportata")
 
+        return self.maze, self.file_path, self.start, self.end
 
-    def load_from_json(self, data):
+
+    def labirinto_from_json(self, data):
         """
         metodo per creare istanza del labirinto a partire dal file json di input
         :return: labirinto
@@ -88,46 +103,5 @@ class Labirinto:
             peso = costo[2] + 1
             self.maze[i][j] = peso
 
-        self.maze_to_image()
+        self.json_to_image()
         print(self.maze)
-
-
-    def load_from_image(self):
-        """
-        metodo per creare istanza del labirinto a partire dall'immagine di input
-        :return: labirinto
-        """
-        pass
-
-
-    def maze_to_image(self):
-        """
-        metodo per creare l'immagine del labirinto a partire dal caricamento del labirinto fornito dal JSON
-        :return:
-        """
-        # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
-        self.image = Image.new("RGB", (len(self.maze[0]), len(self.maze)))
-        pixels = self.image.load()
-        # Impostazione dei pixel dell'immagine in base alla matrice del labirinto
-        for i in range(len(self.maze)):
-            for j in range(len(self.maze[0])):
-                if self.maze[i][j] == 0:
-                    # imposto il muro
-                    pixels[j, i] = (0, 0, 0)  # muro = nero
-                    # imposto il cammino
-                elif self.maze[i][j] == 1:
-                    pixels[j, i] = (255, 255, 255)  # cammino = bianco
-                else:
-                    # imposto il cammino pesato
-                    pixels[j, i] = ((self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16,
-                                    (self.maze[i][j] - 1) * 16)  # cammino pesato = grigio scuro
-        # imposto l'inizio e la fine del labirinto
-        i = self.end[0]
-        j = self.end[1]
-        pixels[j, i] = (255, 0, 0)  # arrivo = rosso
-        for st in self.start:
-            i = st[0]
-            j = st[1]
-            pixels[j, i] = (0, 255, 0)  # partenza = verde
-        self.image.show()
-
