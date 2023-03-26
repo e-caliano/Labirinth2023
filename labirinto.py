@@ -156,11 +156,19 @@ class Labirinto:
         for y in range(altezza):
             for x in range(larghezza):
                 r, g, b = pixel[x, y]
+                # se ii pixel sono verdi rappresentano l'inizio, attraversabile =1
+                if r == 0 and g == 255 and b == 0:
+                    self.start.append((y, x))
+                    labirinto[y][x] = 1
+                # se il pixel è rosso è la fine, attraversabile = 1
+                elif r == 255 and g == 0 and b == 0:
+                    self.end = (y, x)
+                    labirinto[y][x] = 1
                 # pixel nero = muro = 0
-                if r == 0 and g == 0 and b == 0:
+                elif r == 0 and g == 0 and b == 0:
                     labirinto[y][x] = 0
-                # pixel bianco, verde o rosso = posizione attraversabile = 1
-                elif r == 255 and g == 255 and b == 255 or r == 0 and g == 255 and b == 0 or r == 255 and g == 0 and b == 0:
+                # pixel bianco = posizione attraversabile = 1
+                elif r == 255 and g == 255 and b == 255:
                     labirinto[y][x] = 1
                 # pixel grigio = casella con costo
                 else:
@@ -199,5 +207,6 @@ class Labirinto:
                         costo = 15
                     else:
                         raise ValueError("Valore di grigio non valido")
-                    labirinto[y][x] = costo + 1 # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
+                    labirinto[y][
+                        x] = costo + 1  # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
         self.maze = labirinto
