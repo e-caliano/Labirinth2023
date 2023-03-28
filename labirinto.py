@@ -117,7 +117,7 @@ class Labirinto:
 
     def json_to_image(self):
         """
-        Dal file json viene restituita l'immagine
+        Metodo per restituire un'immagine a partire dal file json in ingresso
         :return:
         """
         # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
@@ -147,7 +147,7 @@ class Labirinto:
 
     def labirinto_from_image(self):
         """
-        Dall'immagine, fornita nei diversi formati TIFF, JPEG o PNG, viene restituito il labirinto
+        Metodo che, dall'immagine, fornita nei diversi formati TIFF, JPEG o PNG, restituisce la matrice del labirinto
         :return:
         """
         # apre l'immagine e ottiene i dati dei pixel
