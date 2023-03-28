@@ -3,7 +3,7 @@ import json
 
 
 class Risultati:
-    def _init_(self, labirinto, paths, costo_totale):
+    def __init__(self, labirinto, paths, costo_totale):
         """
         Costruttore della classe risultati che riprende le informazioni dalla classe Labirinto
         :param labirinto: matrice che rappresenta il labrinto
