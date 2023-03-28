@@ -1,5 +1,5 @@
 from labirinto import Labirinto
-from elaborazionePercorso import RicercaPercorso
+from percorso import RicercaPercorso
 from risultatoLabirinto import Risultati
 
 def risoluzioneLabirinto():
