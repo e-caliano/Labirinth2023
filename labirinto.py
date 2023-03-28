@@ -143,8 +143,7 @@ class Labirinto:
             i = st[0]
             j = st[1]
             pixels[j, i] = (0, 255, 0)  # partenza = verde
-        #Mostro l'immagine
-        self.image.show()
+
 
     def labirinto_from_image(self):
         """
@@ -215,6 +214,5 @@ class Labirinto:
                         costo = 15
                     else:
                         raise ValueError("Valore di grigio non valido")
-                    labirinto[y][
-                        x] = costo + 1  # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
+                    labirinto[y][x] = costo + 1  # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
         self.maze = labirinto
