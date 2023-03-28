@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 import json
+from pathlib import Path
 
 
 class Labirinto:
@@ -25,18 +26,18 @@ class Labirinto:
         else:
             self.file_path = None
 
-
     def gestisci_input(self):
         """
-        metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
+        Metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
         se il file è di tipo immagine allora dovrò chiamare un metodo che crea un'istanza del labirinto a partire dall'immagine.
-        :return: none
+        :return: self.maze : labirinto in matrice, self.file_path : path di riferimento, self.path_image : path dell'immagine, self.start : lista delle posizioni iniziali, self.end : posizione finale
         """
+        # check sull'input del file
         if self.file_path is None:
-            raise ValueError("File name not specified")
-
+            raise ValueError("File name non specificato")
+        # se il file non esiste, sollecito un errore
         if not os.path.exists(self.file_path):
-            raise FileNotFoundError(f"File not found: {self.file_path}")
+            raise FileNotFoundError(f"File non trovato: {self.file_path}")
         # estrae il nome del file e l'estensione
         estensione = self.percorso_file.split(".")[-1].lower()
 
@@ -45,10 +46,19 @@ class Labirinto:
             # carico il labirinto dal file JSON
             with open(self.file_path) as json_file:
                 data = json.load(json_file)
+            # chiamo la funzione che elabora il JSON per creare il labrinto e manipolarlo
             self.labirinto_from_json(data)
+            # salvo il path nella variabile name
+            name = Path(self.file_path).name
+            # estrapolo solo il nome dal path in input e lo salvo dentro name
+            name = os.path.splitext(name)[0]
+            # salvo l'immagine del labirinto nella cartella json_image
+            self.path_image = 'json_image/' + name + '.png'
+            self.image.save(self.path_image)
         # controllo che l'estensione sia di tipo TIFF, JPEG O PNG
         elif estensione in ['tiff', 'jpeg', 'png']:
             # carico il labirinto dall'immagine
+            self.path_image = self.file_path
             self.image = Image.open(self.file_path)
             self.labirinto_from_image()
         # in tutti gli altri casi non devo supportare l'estensione
@@ -56,13 +66,12 @@ class Labirinto:
             # gestione dell'errore se l'estensione non è supportata
             print("Estensione del file non supportata")
 
-        return self.maze, self.file_path, self.start, self.end
-
+        return self.maze, self.file_path, self.path_image, self.start, self.end
 
     def labirinto_from_json(self, data):
         """
         metodo per creare istanza del labirinto a partire dal file json di input
-        :return: labirinto
+        :return:
         """
         # controllo che il JSON abbia i campi prestabiliti
         if set(list(data.keys())) != {"larghezza", "altezza", "pareti", "iniziali", "finale", "costi"}:
@@ -104,7 +113,6 @@ class Labirinto:
             self.maze[i][j] = peso
 
         self.json_to_image()
-        print(self.maze)
 
 
     def json_to_image(self):
