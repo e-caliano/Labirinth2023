@@ -1,4 +1,4 @@
-from elaborazione import risoluzioneLabirinto
+from Elaboration import risoluzioneLabirinto
 import os
 
 
