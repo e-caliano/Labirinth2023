@@ -1,5 +1,5 @@
 # Labyrinth2023
-
+Progetto finale del corso 'Programmazione' 2022-2023
 
 ## Traccia del progetto
 Il programma deve acquisire il layout di un labirinto costituito da una matrice di posizioni, una o più posizioni di partenza e una posizione di arrivo, e determinare per ogni punto di partenza il percorso che permette di raggiungere il punto di arrivo o, in alternativa, se non esiste alcun percorso possibile.
@@ -51,18 +51,12 @@ I livelli di grigio possibili sono:
 240 che assegna un costo pari a 15
 
 # Utilizzo del progetto
-Per il corretto funzionamento del programma, è necessario scaricare i seguenti file:
-- labirinto.py
-- percorso.py
-- risultatoLabirinto.py
-- elaboration.py
-- main.py
-
-Per ottenere i vari risultati, bisogna effettuare il RUN del file main.py e verrà richiesto di inserire il nome del file, già presente in ‘indata’.
-Nel caso in cui il file scelto abbia almeno un percorso non possibile, nell’output verrà definita la presenza di questo percorso e il rispettivo indice.
-Il RUN del programma prevede la creazione automatica di una cartella ‘output’ in cui vengono creati i vari file json e immagini ottenuti (per ogni percorso un file json ed un file immagine).
+Per il corretto funzionamento del programma, è necessario scaricare l'intera cartella 'labirinto', all'interno della quale si trovano i diversi file fondamentali per avviare il progetto.
+Per ottenere i vari risultati è necessario effettuare il RUN del file main.py e verrà richiesto di inserire il nome del file, già presente nella cartella ‘indata’.
+Nel caso in cui il labirinto del file scelto abbia almeno un percorso non possibile, nell’output verrà definita la presenza di questo percorso e il rispettivo indice.
+Il RUN del programma prevede la creazione automatica di una cartella ‘output’ in cui vengono creati i vari file json e immagine ottenuti (per ogni percorso possibile verranno creati un file json ed un file immagine).
 I file json conterranno informazioni riguardo la posizione iniziale, finale, costo del percorso e il percorso totale.
-I file immagine conterranno invece il labirinto con il percorso disegnato.
+I file immagine conterranno invece il labirinto con il percorso disegnato dalla posizione iniziale alla posizione finale.
 Nel caso di scelta in ingresso di un file json, il file prevede una creazione automatica di una cartella ‘json_image’, in cui verranno salvate le varie immagini del labirinto nella forma precedente al momento in cui verrà disegnato.
 
 # Esempio di prova di test
@@ -81,8 +75,8 @@ Bisognerà inserire il nome del file presente nella cartella 'indata'
 Abbiamo scelto in questo caso il file '30-20_marked.json'.
 Verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
 
-
-# Primo percorso:
+## Esempio di Output del nostro progetto
+### Primo percorso:
 - Risultati-0.png
 
 ![image](https://user-images.githubusercontent.com/122620191/228555285-88a0fafb-62d9-40f5-accd-f420385048e5.png)             
@@ -90,17 +84,78 @@ Verranno restituiti i seguenti risultati: due file json e due file immagini dei 
 
 - Risultati-0.json
  
-![image](https://user-images.githubusercontent.com/122620191/228555450-5ecbf232-d8a0-4abd-8d4d-07fe59d1b22c.png)
+```
+[
+    {
+        "pos_iniziale": [
+            0,
+            29
+        ],
+        "pos_finale": [
+            21,
+            31
+        ],
+        "costo": 126.0,
+        "path": [
+            [
+                0,
+                29
+            ],
+            [
+                1,
+                29
+            ],
+            [
+                1,
+                28
+            ],
+            [
+                1,
+                27
+        ...
+```
 
 
-# Secondo percorso:
+### Secondo percorso:
 - Risultati-1.png
 
 ![image](https://user-images.githubusercontent.com/122620191/228555501-0fbd7352-4141-4caa-b984-09f267fe4e76.png)             
 
+
 - Risultati-1.json
 
-![image](https://user-images.githubusercontent.com/122620191/228555573-dcf910e1-3694-45c4-88b5-2670827fd575.png)
+```
+[
+    {
+        "pos_iniziale": [
+            19,
+            60
+        ],
+        "pos_finale": [
+            21,
+            31
+        ],
+        "costo": 454.0,
+        "path": [
+            [
+                19,
+                60
+            ],
+            [
+                19,
+                59
+            ],
+            [
+                18,
+                59
+            ],
+            [
+                17,
+                59
+            ],
+           ...
+```
+
 
 
 
