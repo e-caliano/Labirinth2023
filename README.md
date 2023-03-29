@@ -50,4 +50,31 @@ I livelli di grigio possibili sono:
 124 che assegna un costo pari a 14
 240 che assegna un costo pari a 15
 
+# Utilizzo del progetto
+Per il corretto funzionamento del programma, è necessario scaricare i seguenti file:
+- labirinto.py
+- percorso.py
+- risultatoLabirinto.py
+- elaboration.py
+- main.py
+
+Per ottenere i vari risultati, bisogna effettuare il RUN del file main.py e verrà richiesto di inserire il nome del file, già presente in ‘indata’.
+Nel caso in cui il file scelto abbia almeno un percorso non possibile, nell’output verrà definita la presenza di questo percorso e il rispettivo indice.
+Il RUN del programma prevede la creazione automatica di una cartella ‘output’ in cui vengono creati i vari file json e immagini ottenuti (per ogni percorso un file json ed un file immagine).
+I file json conterranno informazioni riguardo la posizione iniziale, finale, costo del percorso e il percorso totale.
+I file immagine conterranno invece il labirinto con il percorso disegnato.
+Nel caso di scelta in ingresso di un file json, il file prevede una creazione automatica di una cartella ‘json_image’, in cui verranno salvate le varie immagini del labirinto nella forma precedente al momento in cui verrà disegnato.
+
+# Esempio di prova di test:
+Se in ingresso inserissimo il file: “30-20_marked.json”, dopo il RUN, nel file output, verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
+
+![image](https://user-images.githubusercontent.com/122620191/228555285-88a0fafb-62d9-40f5-accd-f420385048e5.png)
+
+![image](https://user-images.githubusercontent.com/122620191/228555450-5ecbf232-d8a0-4abd-8d4d-07fe59d1b22c.png)
+
+![image](https://user-images.githubusercontent.com/122620191/228555501-0fbd7352-4141-4caa-b984-09f267fe4e76.png)
+
+![image](https://user-images.githubusercontent.com/122620191/228555573-dcf910e1-3694-45c4-88b5-2670827fd575.png)
+
+
 
