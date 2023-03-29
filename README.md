@@ -69,9 +69,9 @@ Nel caso di scelta in ingresso di un file json, il file prevede una creazione au
 ## Esempio Input del nostro progetto
 Una volta avviato il codice del 'main' viene chiesto di inserire il inserire il file json o immagine.
 
-'''python
+```
 30-20_marked.tiff
-'''
+```
 
 Se in ingresso inserissimo il file: “30-20_marked.json”, dopo il RUN, nel file output, verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
 
