@@ -68,10 +68,12 @@ Nel caso di scelta in ingresso di un file json, il file prevede una creazione au
 # Esempio di prova di test:
 Se in ingresso inserissimo il file: “30-20_marked.json”, dopo il RUN, nel file output, verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
 
-![image](https://user-images.githubusercontent.com/122620191/228555285-88a0fafb-62d9-40f5-accd-f420385048e5.png)    ![image](https://user-images.githubusercontent.com/122620191/228555450-5ecbf232-d8a0-4abd-8d4d-07fe59d1b22c.png)
+Primo percorso:
+![image](https://user-images.githubusercontent.com/122620191/228555285-88a0fafb-62d9-40f5-accd-f420385048e5.png)             ![image](https://user-images.githubusercontent.com/122620191/228555450-5ecbf232-d8a0-4abd-8d4d-07fe59d1b22c.png)
 
 
-![image](https://user-images.githubusercontent.com/122620191/228555501-0fbd7352-4141-4caa-b984-09f267fe4e76.png)    ![image](https://user-images.githubusercontent.com/122620191/228555573-dcf910e1-3694-45c4-88b5-2670827fd575.png)
+Secondo percorso:
+![image](https://user-images.githubusercontent.com/122620191/228555501-0fbd7352-4141-4caa-b984-09f267fe4e76.png)             ![image](https://user-images.githubusercontent.com/122620191/228555573-dcf910e1-3694-45c4-88b5-2670827fd575.png)
 
 
 
