@@ -70,21 +70,35 @@ Nel caso di scelta in ingresso di un file json, il file prevede una creazione au
 Una volta avviato il codice del 'main' viene chiesto di inserire il inserire il file json o immagine.
 
 ```
-30-20_marked.tiff
+Inserisci nome del file con la sua estensione:
 ```
 
-Se in ingresso inserissimo il file: “30-20_marked.json”, dopo il RUN, nel file output, verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
+Bisognerà inserire il nome del file presente nella cartella 'indata'
+
+```
+30-20_marked.json
+```
+Abbiamo scelto in questo caso il file '30-20_marked.json'.
+Verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
 
 
 # Primo percorso:
+- Risultati-0.png
 
 ![image](https://user-images.githubusercontent.com/122620191/228555285-88a0fafb-62d9-40f5-accd-f420385048e5.png)             
 
+
+- Risultati-0.json
+ 
 ![image](https://user-images.githubusercontent.com/122620191/228555450-5ecbf232-d8a0-4abd-8d4d-07fe59d1b22c.png)
 
 
 # Secondo percorso:
+- Risultati-1.png
+
 ![image](https://user-images.githubusercontent.com/122620191/228555501-0fbd7352-4141-4caa-b984-09f267fe4e76.png)             
+
+- Risultati-1.json
 
 ![image](https://user-images.githubusercontent.com/122620191/228555573-dcf910e1-3694-45c4-88b5-2670827fd575.png)
 
