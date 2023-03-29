@@ -65,7 +65,14 @@ I file json conterranno informazioni riguardo la posizione iniziale, finale, cos
 I file immagine conterranno invece il labirinto con il percorso disegnato.
 Nel caso di scelta in ingresso di un file json, il file prevede una creazione automatica di una cartella ‘json_image’, in cui verranno salvate le varie immagini del labirinto nella forma precedente al momento in cui verrà disegnato.
 
-# Esempio di prova di test:
+# Esempio di prova di test
+## Esempio Input del nostro progetto
+Una volta avviato il codice del 'main' viene chiesto di inserire il inserire il file json o immagine.
+
+'''python
+30-20_marked.tiff
+'''
+
 Se in ingresso inserissimo il file: “30-20_marked.json”, dopo il RUN, nel file output, verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
 
 
