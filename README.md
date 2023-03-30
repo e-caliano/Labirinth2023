@@ -158,7 +158,7 @@ Verranno restituiti i seguenti risultati: due file json e due file immagini dei 
 
 # Dockerfile
 Docker può creare immagini automaticamente leggendo le istruzioni da un file Dockerfile. 
-Il Dockerfile un documento di testo che contiene tutti i comandi che un utente potrebbe chiamare sulla riga di comando per assemblare un'immagine.
+Il Dockerfile è un documento di testo che contiene tutti i comandi che un utente potrebbe chiamare sulla riga di comando per assemblare un'immagine.
 Il Dockerfile che creiamo, contiene tutte le informazioni necessarie alla creazione dell'immagine Docker. Dallo sviluppo dell'ambiente virtuale python, con l'utilizzo del file 'requirements.txt' contenente vari pacchetti e copiando i file presenti nel progetto.
 Il modello seguito è: Dockerfile > Docker image > Docker container.
 
