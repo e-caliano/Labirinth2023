@@ -198,10 +198,9 @@ Se tutto è stato fatto nel modo definito, il comando prededente restituirà il 
 ```
 Inserisci nome del file con la sua estensione:
 ```
-Andrà utilizzato il path virutale da analizzare, in quanto utilizziamo il container Docker.
 Quindi andrà inserito, nel nostro caso, questo comando:
 ```
-/usr/src/app/indata/30-20_marked.json
+indata/30-20_marked.json
 ```
 Ovviamente, si può anche continuare ad eseguire all'interno del container utilizzato, tramite apposito comando:
 ```
