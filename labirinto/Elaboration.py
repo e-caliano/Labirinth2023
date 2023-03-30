@@ -15,7 +15,7 @@ def risoluzioneLabirinto():
     labirinto.gestisci_input()
     rp = RicercaPercorso(labirinto)
     #creo una cartella per gli output
-    outputDir = "./labirinto/output/"
+    outputDir = "output"
 
     #ottengo la lista dei percorsi per il file scelto e la lista dei costi totali
     paths, costo_totale = rp.trova_percorsi()
@@ -30,8 +30,8 @@ def risoluzioneLabirinto():
             print('Non è stato trovato nessun percorso per il percorso numero: {0}'.format(index))
 
         # crea l'immagine e il file JSON
-        risultati.crea_immagine(outputDir + 'Risultati-{0}.png'.format(i))
-        risultati.crea_file_json(outputDir + 'Risultati-{0}.json'.format(i), index)
+        risultati.crea_immagine(outputDir+'/Risultati-{0}.png'.format(i))
+        risultati.crea_file_json(outputDir+'/Risultati-{0}.json'.format(i), index)
 
 
 def checkDirectory(nameDirectory):
