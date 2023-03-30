@@ -5,16 +5,19 @@ import json
 
 class Labirinto:
     """
-    costruttore della classe labirinto
+    La classe Labirinto rappresenta un labirinto e si occupa di leggere e manipolare il labirinto a partire da un file JSON o da un'immagine.
     """
     def __init__(self, percorso_file):
-
+        """
+        Il costruttore della classe prende in input un percorso di file e inizializza alcune variabili come una matrice per il labirinto, una lista per i punti di partenza, una tupla per il punto di arrivo e un'immagine per il labirinto. In particolare, se il file non esiste, viene sollevata un'eccezione.
+        """
+        # se il file non esiste verrà sollevata un'eccezione
         self.percorso_file = percorso_file
         if not os.path.exists(self.percorso_file):
             raise FileNotFoundError(f"File non trovato: {self.percorso_file}")
         # matrice che ospiterà il labirinto
         self.maze = []
-        # matrice che ospiterà i punti di partenza
+        # lista che ospiterà i punti di partenza
         self.start = []
         # tupla che ospita il punto di arrivo
         self.end = ()
@@ -25,11 +28,11 @@ class Labirinto:
         """
         Metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
         se il file è di tipo immagine allora dovrò chiamare un metodo che crea un'istanza del labirinto a partire dall'immagine.
-        :return: self.maze : labirinto in matrice, self.file_path : path di riferimento, self.path_image : path dell'immagine, self.start : lista delle posizioni iniziali, self.end : posizione finale
-        """
+        :return: self.maze : labirinto in matrice, self.percorso_file : rappresenta il percorso del file contenente la rappresentazione del labirinto, self.start : lista delle posizioni iniziali, self.end : posizione finale """
+        #Ottengo il nome del file e la sua estensione
         name, estensione = os.path.splitext(os.path.basename(self.percorso_file))
         # controllo l'estensione ed eseguo l'azione appropriata
-        if estensione == 'json':
+        if estensione == '.json':
             # carico il labirinto dal file JSON
             with open(self.percorso_file) as json_file:
                 data = json.load(json_file)
@@ -53,7 +56,7 @@ class Labirinto:
 
     def labirinto_from_json(self, data):
         """
-        metodo per creare istanza del labirinto a partire dal file json di input
+        Metodo per creare istanza del labirinto a partire dal file json di input
         :return:
         """
         # controllo che il JSON abbia i campi prestabiliti
@@ -100,7 +103,7 @@ class Labirinto:
 
     def json_to_image(self):
         """
-        Metodo per restituire un'immagine a partire dal file json in ingresso
+        Metodo per convertire la matrice del labirinto in un'immagine
         :return:
         """
         # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
@@ -130,7 +133,7 @@ class Labirinto:
 
     def labirinto_from_image(self):
         """
-        Metodo che, dall'immagine, fornita nei diversi formati TIFF, JPEG o PNG, restituisce la matrice del labirinto
+        Metodo che consente di estrarre un labirinto rappresentato da un'immagine (in formato PNG, JPEG, etc.) e per ottenere una matrice del labirinto.
         :return:
         """
         # apre l'immagine e ottiene i dati dei pixel
