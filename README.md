@@ -70,7 +70,7 @@ Inserisci nome del file con la sua estensione:
 Bisognerà inserire il nome del file presente nella cartella 'indata'
 
 ```
-30-20_marked.json
+indata/30-20_marked.json
 ```
 Abbiamo scelto in questo caso il file '30-20_marked.json'.
 Verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
@@ -156,8 +156,63 @@ Verranno restituiti i seguenti risultati: due file json e due file immagini dei 
            ...
 ```
 
+# Dockerfile
+Docker può creare immagini automaticamente leggendo le istruzioni da un file Dockerfile. 
+Il Dockerfile un documento di testo che contiene tutti i comandi che un utente potrebbe chiamare sulla riga di comando per assemblare un'immagine.
+Il Dockerfile che creiamo, contiene tutte le informazioni necessarie alla creazione dell'immagine Docker. Dallo sviluppo dell'ambiente virtuale python, con l'utilizzo del file 'requirements.txt' contenente vari pacchetti e copiando i file presenti nel progetto.
+Il modello seguito è: Dockerfile > Docker image > Docker container.
 
+## Immagine Docker
+Per prima cosa, bisogna controllare che nella stessa posizione siano presenti i file 'requirements.txt' e 'Dockerfile' (creato in base a ciò detto precedentemente).
+Il comando che prevede la creazione dell'immagine è questo:
+```
+docker build . -t utente/mymaze:1
+```
+In questo comando:
+- __dockerbuild__ avvia il processo di costruzione dell'immagine Docker;
+- __.__ specifica la directory corrente come contesto di build, cioè la directory in cui cercare il Dockerfile;
+- __nome_utente/nome_immagine:versione__ è il modello. Nel nostro caso: 'utente' rappresenta il nome dell'utente Docker Hub, 'mymaze' rappresenta il nome dell'immagine e '1' rappresenta la versione dell'immagine-
 
+In questo modo, l'immagine Docker verrà creata e assegnata al tag utente/mymaze:1, che può essere utilizzato successivamente per eseguire o distribuire l'immagine.
 
+# Esecuzione del container Docker
+Innanzitutto, per poter eseguire il container Docker, c'è bisogno innanzitutto che nel Dockerfile sia presente questo comando:
+```
+CMD ["python", "./main.py"]
+```
+E' successivamente necessario eseguire il container Docker specificando i percorsi della cartella 'indata' e della cartella 'output', per poter capire il posizionamento dei dati in ingresso e in uscita.
+Il comando da eseguire successivamente è:
+```
+docker container run -a stdin -a stdout -it -v $(pwd)/labirinto/indata:/usr/src/app/indata -v $(pwd)/labirinto/output:/usr/src/app/output --name labirinto utente/mymaze:1
+```
+Questo comando avvia un nuovo container Docker a partire da un'immagine Docker denominata "utente/mymaze:1". Il nuovo container viene denominato "labirinto".
 
+- __-a stdin__ e -__a stdout__: questi flag permettono di connettere lo stdin e lo stdout del container con quelli dell'host;
+- __-it__: questo flag attiva la modalità interattiva del container, che consente all'utente di interagire con la shell del container;
+- __-v $(pwd)/labirinto/indata:/usr/src/app/indata__: questo flag monta la directory indata dell'host all'interno del container, in modo che il container possa accedere ai file in essa contenuti;
+- __-v $(pwd)/labirinto/output:/usr/src/app/output__: questo flag monta la directory output dell'host all'interno del container, in modo che il container possa scrivere i file di output generati durante l'esecuzione;
+- __--name labirinto__: questo flag assegna un nome al container avviato.
 
+## Cosa succede successivamente?
+Se tutto è stato fatto nel modo definito, il comando prededente restituirà il commento:
+```
+Inserisci nome del file con la sua estensione:
+```
+Andrà utilizzato il path virutale da analizzare, in quanto utilizziamo il container Docker.
+Quindi andrà inserito, nel nostro caso, questo comando:
+```
+/usr/src/app/indata/30-20_marked.json
+```
+Ovviamente, si può anche continuare ad eseguire all'interno del container utilizzato, tramite apposito comando:
+```
+docker container start -ai labirinto
+```
+Questo comando avvia un container Docker con il nome "labirinto" e fa partire il processo ad esso associato. La flag "-ai" sta per "attach" e "interactive", il che significa che si collega al terminale del container e permette all'utente di interagire con esso attraverso il terminale del proprio sistema operativo.
+
+La parte dedicata alla visualizzazione dell'output,  prevede l'utilizzo di questi comandi:
+```
+docker start labirinto
+docker exec -it labirinto /bin/bash
+```
+Il primo comando, __docker start labirinto__ avvia il container Docker chiamato "labirinto", se questo container era stato precedentemente arrestato.
+Il secondo comando __docker exec -it labirinto /bin/bash__ esegue una shell Bash all'interno del container "labirinto". Questo permette di interagire con il container in modo interattivo, ad esempio per eseguire comandi all'interno del container o per modificare i file al suo interno.
