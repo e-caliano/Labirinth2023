@@ -56,4 +56,4 @@ class Risultati:
 
         # Scriviamo il dizionario su file JSON
         with open(nome_file, 'w') as f:
-            json.dump(dati, f)
+            json.dump(dati, f, indent=4)

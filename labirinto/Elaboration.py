@@ -15,7 +15,7 @@ def risoluzioneLabirinto():
     labirinto.gestisci_input()
     rp = RicercaPercorso(labirinto)
     #creo una cartella per gli output
-    outputDir = "output/"
+    outputDir = "./labirinto/output/"
 
     #ottengo la lista dei percorsi per il file scelto e la lista dei costi totali
     paths, costo_totale = rp.trova_percorsi()

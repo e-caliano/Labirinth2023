@@ -53,7 +53,7 @@ class Labirinto:
             # estrapolo solo il nome dal path in input e lo salvo dentro name
             name = os.path.splitext(name)[0]
             # salvo l'immagine del labirinto nella cartella json_image
-            self.path_image = 'json_image/' + name + '.png'
+            self.path_image = './labirinto/json_image/' + name + '.png'
             self.image.save(self.path_image)
         # controllo che l'estensione sia di tipo TIFF, JPEG O PNG
         elif estensione in ['tiff', 'jpeg', 'png']:
