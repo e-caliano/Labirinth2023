@@ -8,9 +8,13 @@ class Labirinto:
     La classe Labirinto rappresenta un labirinto e si occupa di leggere e manipolare il labirinto a partire da un file JSON o da un'immagine.
     """
     def __init__(self, percorso_file):
+
         """
-        Il costruttore della classe prende in input un percorso di file e inizializza alcune variabili come una matrice per il labirinto, una lista per i punti di partenza, una tupla per il punto di arrivo e un'immagine per il labirinto. In particolare, se il file non esiste, viene sollevata un'eccezione.
+        Costruttore della classe Labirinto: la classe prende in input un percorso di file come argomento, controlla se il file esiste,
+        quindi inizializza alcune variabili, come una matrice per il labirinto, una lista per i punti di partenza,
+        una tupla per il punto di arrivo e un'immagine per il labirinto.
         """
+
         # se il file non esiste verrà sollevata un'eccezione
         self.percorso_file = percorso_file
         if not os.path.exists(self.percorso_file):
@@ -25,11 +29,14 @@ class Labirinto:
         self.image = None
 
     def gestisci_input(self):
+
         """
         Metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
         se il file è di tipo immagine allora dovrò chiamare un metodo che crea un'istanza del labirinto a partire dall'immagine.
-        :return: self.maze : labirinto in matrice, self.percorso_file : rappresenta il percorso del file contenente la rappresentazione del labirinto, self.start : lista delle posizioni iniziali, self.end : posizione finale """
-        #Ottengo il nome del file e la sua estensione
+        :return: self.maze : labirinto in matrice, self.percorso_file : rappresenta il percorso del file contenente la rappresentazione del labirinto, self.start : lista delle posizioni iniziali, self.end : posizione finale
+        """
+
+        # Ottengo il nome del file e la sua estensione
         name, estensione = os.path.splitext(os.path.basename(self.percorso_file))
         # controllo l'estensione ed eseguo l'azione appropriata
         if estensione == '.json':
@@ -140,7 +147,7 @@ class Labirinto:
         pixel = self.image.load()
         larghezza, altezza = self.image.size
 
-        # inizializza la matrice del labirinto
+        # inizializzo la matrice del labirinto
         labirinto = []
         for i in range(altezza):
             labirinto.append([0] * larghezza)
@@ -149,7 +156,7 @@ class Labirinto:
         for y in range(altezza):
             for x in range(larghezza):
                 r, g, b = pixel[x, y]
-                # se ii pixel sono verdi rappresentano l'inizio, attraversabile =1
+                # se i pixel sono verdi rappresentano l'inizio, attraversabile =1
                 if r == 0 and g == 255 and b == 0:
                     self.start.append((y, x))
                     labirinto[y][x] = 1
@@ -200,5 +207,5 @@ class Labirinto:
                         costo = 15
                     else:
                         raise ValueError("Valore di grigio non valido")
-                    labirinto[y][x] = costo + 1  # associazione del costo in base al grigio, assumento che il grigio sia anche un corridoio
+                    labirinto[y][x] = costo + 1  # associazione del costo in base al grigio, assumendo che il grigio sia anche un corridoio
         self.maze = labirinto

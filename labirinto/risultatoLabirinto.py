@@ -3,6 +3,9 @@ import json
 
 
 class Risultati:
+    """
+    La classe Risultati viene utilizzata per creare un'immagine del labirinto con i percorsi colorati e creare un file JSON con le informazioni sui percorsi trovati dall'algoritmo di ricerca.
+    """
     def __init__(self, labirinto, paths, costo_totale):
         """
         Costruttore della classe risultati che riprende le informazioni dalla classe Labirinto
@@ -30,6 +33,7 @@ class Risultati:
 
         # Coloriamo i percorsi trovati in rosso (poichè verranno fatti in file diversi va anche bene utilizzare lo stesso colore)
         colori = ['red']
+        # eseguo un ciclo sui percorsi trovati e li colora utilizzando il colore corrente
         for i, path in enumerate(self.lista_percorsi):
             colore = colori[i % len(colori)]
             x, y = path
@@ -45,6 +49,7 @@ class Risultati:
         """
         Metodo per creare un file JSON con le informazioni sui percorsi
         :param nome_file: nome del file in cui salvare il JSON
+        :param index : indice del percorso selezionato, ovvero l'indice della lista dei percorsi con costo minimo self.lista_percorsi e della lista dei costi dei percorsi self.lista_costi associati alla posizione di partenza scelta.
         """
         # Creiamo un dizionario contenente le informazioni sui percorsi
         dati = []
