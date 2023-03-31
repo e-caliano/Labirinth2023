@@ -13,6 +13,7 @@ class RicercaPercorso:
         self.height = len(self.labirinto.maze)
 
     def trova_percorsi(self):
+
         """
         Metodo che trova i percorsi con costo minimo da start ad end e utilizzando l'algoritmo A* per trovare il percorso più breve fino alla posizione di arrivo.
         :return: paths : lista dei percorsi, costi_totali : lista dei costi
@@ -96,6 +97,7 @@ class RicercaPercorso:
         return lunghezza
 
     def calcola_distanza(self, pos1, pos2):
+
         """
         Metodo per calcolare la distanza di Manhattan tra due celle del labirinto
         :param pos1: prima cella

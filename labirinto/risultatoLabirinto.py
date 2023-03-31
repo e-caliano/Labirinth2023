@@ -3,6 +3,7 @@ import json
 
 
 class Risultati:
+
     """
     La classe Risultati viene utilizzata per creare un'immagine del labirinto con i percorsi colorati e creare un file JSON con le informazioni sui percorsi trovati dall'algoritmo di ricerca.
     """
