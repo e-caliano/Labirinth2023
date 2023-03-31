@@ -4,11 +4,15 @@ from queue import PriorityQueue
 class RicercaPercorso:
 
     """
-    Costruttore della classe RicercaPercorso: Questa classe implementa l'algoritmo di ricerca del percorso più breve in un labirinto utilizzando la coda prioritaria e l'algoritmo A*.
-    :param labirinto: matrice che rappresenta il labirinto
+    Questa classe implementa l'algoritmo di ricerca del percorso più breve in un labirinto utilizzando la coda prioritaria e l'algoritmo A*.
     """
     #Inizializziamo gli attributi labirinto, width e height dell'oggetto RicercaPercorso. width e height sono le dimensioni del labirinto.
     def __init__(self, labirinto):
+        """
+        Costruttore della classe RicercaPercorso
+        :param labirinto: matrice che rappresenta il labirinto
+
+        """
         self.labirinto = labirinto
         self.width = len(self.labirinto.maze[0])
         self.height = len(self.labirinto.maze)

@@ -5,7 +5,7 @@ import os
 
 def risoluzioneLabirinto():
     """
-    Metodo utile per richiamare le varie classi e gestire gli output
+    Funzione utile per richiamare le varie classi e gestire gli output
     :return:
     """
     #Chiedo all'utente di inserire il nome del file presente nella cartella indata
@@ -36,8 +36,8 @@ def risoluzioneLabirinto():
 
 def checkDirectory(nameDirectory):
     """
-    Metodo che consente di svolgere un check per vedere le directory e, quindi, nel caso non ci sia una directory, viene creata
-    :param nameDirectory:
+    Funzione che consente di effettuare un check per vedere le directory e, quindi, nel caso non ci sia una directory, viene creata
+    :param nameDirectory: il nome della directory
     :return:
     """
     isExist = os.path.exists(nameDirectory)
