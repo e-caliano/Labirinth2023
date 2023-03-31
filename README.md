@@ -70,7 +70,7 @@ Inserisci nome del file con la sua estensione:
 Bisognerà inserire il nome del file presente nella cartella 'indata'
 
 ```
-indata/30-20_marked.json
+indata/30-20_marked.tiff
 ```
 Abbiamo scelto in questo caso il file '30-20_marked.json'.
 Verranno restituiti i seguenti risultati: due file json e due file immagini dei percorsi.
@@ -200,7 +200,7 @@ Inserisci nome del file con la sua estensione:
 ```
 Quindi andrà inserito, nel nostro caso, questo comando:
 ```
-indata/30-20_marked.json
+indata/30-20_marked.tiff
 ```
 Ovviamente, si può anche continuare ad eseguire all'interno del container utilizzato, tramite apposito comando:
 ```
