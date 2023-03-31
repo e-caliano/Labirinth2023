@@ -4,7 +4,6 @@ from risultatoLabirinto import Risultati
 import os
 
 def risoluzioneLabirinto():
-
     """
     Metodo utile per richiamare le varie classi e gestire gli output
     :return:

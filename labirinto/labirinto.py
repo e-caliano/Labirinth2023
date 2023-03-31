@@ -4,7 +4,6 @@ import json
 
 
 class Labirinto:
-
     """
     La classe Labirinto rappresenta un labirinto e si occupa di leggere e manipolare il labirinto a partire da un file JSON o da un'immagine.
     """

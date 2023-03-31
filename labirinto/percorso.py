@@ -2,6 +2,7 @@ from queue import PriorityQueue
 
 
 class RicercaPercorso:
+
     """
     Costruttore della classe RicercaPercorso: Questa classe implementa l'algoritmo di ricerca del percorso più breve in un labirinto utilizzando la coda prioritaria e l'algoritmo A*.
     :param labirinto: matrice che rappresenta il labirinto
