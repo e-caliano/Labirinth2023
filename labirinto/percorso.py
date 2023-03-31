@@ -10,7 +10,7 @@ class RicercaPercorso:
     def __init__(self, labirinto):
         """
         Costruttore della classe RicercaPercorso
-        :param labirinto: matrice che rappresenta il labirinto
+        :param labirinto: richiamerà la classe Labirinto per utilizzare le informazioni del labirinto, sopratutto la matrice di posizioni
 
         """
         self.labirinto = labirinto
