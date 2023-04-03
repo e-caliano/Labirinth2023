@@ -4,12 +4,15 @@ import json
 
 class Risultati:
     """
-    La classe Risultati viene utilizzata per creare un'immagine del labirinto con i percorsi colorati e creare un file JSON con le informazioni sui percorsi trovati dall'algoritmo di ricerca.
+    La classe Risultati viene utilizzata per creare un'immagine del labirinto con i percorsi colorati e creare un file JSON
+    con le informazioni sui percorsi trovati dall'algoritmo di ricerca.
     """
     def __init__(self, labirinto, paths, costo_totale):
         """
-        Costruttore della classe risultati che riprende le informazioni dalla classe Labirinto
-        :param labirinto: matrice che rappresenta il labrinto
+        Costruttore della classe risultati che riprende le informazioni dalla classe Labirinto.
+        Innanzitutto prendiamo le informazioni necessarie dalla classe Labirinto, come l'altezza e la larghezza,
+        utilizzate a partire dalla lunghezza delle dimensioni del labirinto ottenuto, e l'immagine.
+        :param labirinto: lista di liste che rappresenta il labrinto
         :param paths: lista dei percorsi con costo minimo per ogni posizione di inizio
         :param costo_totale: lista dei costi dei percorsi in "paths"
         :return:
@@ -49,11 +52,13 @@ class Risultati:
         """
         Metodo per creare un file JSON con le informazioni sui percorsi
         :param nome_file: nome del file in cui salvare il JSON
-        :param index : indice del percorso selezionato, ovvero l'indice della lista dei percorsi con costo minimo self.lista_percorsi e della lista dei costi dei percorsi self.lista_costi associati alla posizione di partenza scelta.
+        :param index : indice del percorso selezionato, ovvero l'indice della lista dei percorsi con costo minimo self.lista_percorsi
+        e della lista dei costi dei percorsi self.lista_costi associati alla posizione di partenza scelta.
         """
         # Creiamo un dizionario contenente le informazioni sui percorsi
         dati = []
-        # Il metodo quindi crea un dizionario dati contenente le informazioni relative al percorso selezionato, tra cui la posizione iniziale, la posizione finale, il costo totale del percorso e la lista dei nodi attraversati.
+        # Il metodo, quindi crea un dizionario dati contenente le informazioni relative al percorso selezionato
+        # tra cui la posizione iniziale, la posizione finale, il costo totale del percorso e la lista dei nodi attraversati.
         pos_iniziale = self.labirinto.start[index]
         pos_finale = self.labirinto.end
         costo = self.lista_costi[index]

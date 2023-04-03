@@ -6,13 +6,14 @@ class RicercaPercorso:
     """
     Questa classe implementa l'algoritmo di ricerca del percorso più breve in un labirinto utilizzando la coda prioritaria e l'algoritmo A*.
     """
-    #Inizializziamo gli attributi labirinto, width e height dell'oggetto RicercaPercorso. width e height sono le dimensioni del labirinto.
+
     def __init__(self, labirinto):
         """
         Costruttore della classe RicercaPercorso
-        :param labirinto: richiamerà la classe Labirinto per utilizzare le informazioni del labirinto, sopratutto la matrice di posizioni
+        :param labirinto: richiamerà la classe Labirinto per utilizzare le informazioni del labirinto, soprattutto la matrice di posizioni
 
         """
+        # Inizializziamo gli attributi labirinto, width e height dell'oggetto RicercaPercorso. width e height sono le dimensioni del labirinto.
         self.labirinto = labirinto
         self.width = len(self.labirinto.maze[0])
         self.height = len(self.labirinto.maze)
@@ -20,7 +21,8 @@ class RicercaPercorso:
     def trova_percorsi(self):
 
         """
-        Metodo che trova i percorsi con costo minimo da start ad end e utilizzando l'algoritmo A* per trovare il percorso più breve fino alla posizione di arrivo.
+        Metodo che trova i percorsi con costo minimo da start ad end e utilizzando l'algoritmo A* per trovare il percorso più breve
+        fino alla posizione di arrivo.
         :return: paths : lista dei percorsi, costi_totali : lista dei costi
         """
         #inizializzo due liste vuote dei percorsi e dei costi
@@ -48,7 +50,9 @@ class RicercaPercorso:
                 if current_pos == self.labirinto.end:
                     # Percorso trovato, lo aggiungiamo alla lista dei percorsi
                     path = [current_pos]
-                    # Vengono esplorate tutte le celle adiacenti alla posizione corrente e per ogni cella adiacente viene calcolato il costo del percorso dalla posizione corrente alla cella adiacente e la distanza dalla cella adiacente alla fine del labirinto.
+                    # Vengono esplorate tutte le celle adiacenti alla posizione corrente
+                    # per ogni cella adiacente viene calcolato il costo del percorso dalla posizione corrente alla cella adiacente e
+                    # la distanza dalla cella adiacente alla fine del labirinto.
                     while current_pos != start_pos:
                         path.insert(0, best_path[current_pos])
                         current_pos = best_path[current_pos]
@@ -60,25 +64,41 @@ class RicercaPercorso:
                 row, col = current_pos
                 # La lista neighbors viene inizializzata come lista vuota per contenere le posizioni adiacenti alla posizione corrente.
                 neighbors = []
+                # Controllo se il punto corrente ha un vicino sopra di esso e se tale vicino è libero.
                 if row > 0 and self.labirinto.maze[row - 1][col]:
+                    #Aggiunta del vicino di sopra alla lista neighbors.
                     neighbors.append((row - 1, col))
+                # Controllo se il punto corrente ha un vicino sotto di esso e se tale vicino è libero.
                 if row < self.height - 1 and self.labirinto.maze[row + 1][col]:
+                    #Aggiunta del vicino di sotto alla lista neighbors.
                     neighbors.append((row + 1, col))
+                #Controllo se il punto corrente ha un vicino a sinistra di esso e se tale vicino è libero.
                 if col > 0 and self.labirinto.maze[row][col - 1]:
+                    # Aggiunta del vicino di sinistra alla lista neighbors.
                     neighbors.append((row, col - 1))
+                # Controllo se il punto corrente ha un vicino a destra di esso e se tale vicino è libero.
                 if col < self.width - 1 and self.labirinto.maze[row][col + 1]:
+                    #Aggiunta del vicino di destra alla lista neighbors.
                     neighbors.append((row, col + 1))
-                # Dopo aver trovato tutte le posizioni adiacenti valide, viene eseguito un ciclo for per tutte le posizioni adiacenti nella lista neighbors.
+                # Dopo aver trovato tutte le posizioni adiacenti valide
+                # viene eseguito un ciclo for per tutte le posizioni adiacenti nella lista neighbors.
                 for neighbor in neighbors:
-                    # Per ogni posizione adiacente, viene calcolato il costo (costo) di spostamento da current_pos a neighbor. Il costo è determinato dal valore della cella nella griglia del labirinto (self.labirinto.maze) nella posizione di neighbor.
+                    # Per ogni posizione adiacente, viene calcolato il costo (costo) di spostamento da current_pos a neighbor.
+                    # Il costo è determinato dal valore della cella nella griglia del labirinto (self.labirinto.maze) nella posizione di neighbor.
                     costo = self.labirinto.maze[neighbor[0]][neighbor[1]]
-                    # Successivamente viene calcolata la distanza dal punto di partenza alla posizione neighbor (distanza). Questo viene fatto sommando il costo del percorso minimo dalla posizione di partenza (current_pos) a neighbor, al costo del percorso minimo dalla posizione di partenza al punto finale.
+                    # Successivamente viene calcolata la distanza dal punto di partenza alla posizione neighbor (distanza).
+                    # Questo viene fatto sommando il costo del percorso minimo dalla posizione di partenza (current_pos) a neighbor,
+                    # al costo del percorso minimo dalla posizione di partenza al punto finale.
                     distanza = costo_minimo[current_pos] + costo
-                    # Se la distanza calcolata per questa posizione adiacente è inferiore al costo minimo precedente per neighbor, allora viene aggiornato il costo minimo per neighbor e la migliore posizione precedente (best_path) viene impostata come current_pos. Infine, la posizione neighbor viene inserita nella coda di priorità (queue) con la sua priorità calcolata come la somma della distanza e della distanza stimata dal punto di partenza al punto finale (self.calcola_distanza).
+                    # Se la distanza calcolata per questa posizione adiacente è inferiore al costo minimo precedente per neighbor
                     if distanza < costo_minimo[neighbor]:
+                        # quindi viene aggiornato il costo minimo per neighbor
                         costo_minimo[neighbor] = distanza
+                        # la migliore posizione precedente (best_path) viene impostata come current_pos.
                         best_path[neighbor] = current_pos
+                        # la sua priorità calcolata come somma della distanza e della distanza stimata dall'inizio alla fine (self.calcola_distanza).
                         priority = distanza + self.calcola_distanza(neighbor, self.labirinto.end)
+                        # Infine, la posizione neighbor viene inserita nella coda di priorità (queue)
                         queue.put(neighbor, priority)
 
             # Aggiungiamo il costo totale del percorso trovato alla lista dei costi totali
