@@ -10,8 +10,10 @@ def risoluzioneLabirinto():
     """
 
     try:
-        #Chiedo all'utente di inserire il nome del file presente nella cartella indata
-        file=input('Inserisci nome del file con la sua estensione: ')
+        # Chiedo all'utente di inserire il nome del file presente nella cartella indata
+        file = input('Inserisci nome del file con la sua estensione: ')
+        # rendo più friendly l'input, andando a eliminare eventuali spazi all'inizio o alla fine della stringa di input
+        file = file.strip()
         #richiamo le varie funzioni in base ai parametri richiesti
         labirinto = Labirinto(file)
         labirinto.gestisci_input()

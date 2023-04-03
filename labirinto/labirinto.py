@@ -4,35 +4,48 @@ import json
 
 
 class Labirinto:
+
     """
-    La classe Labirinto rappresenta un labirinto e si occupa di leggere e manipolare il labirinto a partire da un file JSON o da un'immagine.
+    La classe Labirinto rappresenta un labirinto e si occupa di leggere e
+    manipolare il labirinto a partire da un file JSON o da un'immagine forniti in input.
     """
+
     def __init__(self, percorso_file):
 
         """
-        Costruttore della classe Labirinto: la classe prende in input un percorso di file come argomento, controlla se il file esiste,
-        quindi inizializza alcune variabili, come una matrice per il labirinto, una lista per i punti di partenza,
-        una tupla per il punto di arrivo e un'immagine per il labirinto.
+        Costruttore della classe Labirinto:
+        la classe prende in input un percorsodi file come argomento, controlla se il file esiste,
+        quindi inizializza alcune variabili, come una lista di liste (assimilabile a una matrice) per il labirinto,
+        una lista per i punti di partenza, una tupla per il punto di arrivo e un'immagine per il labirinto.
         """
 
-        # se il file non esiste verrà sollevata un'eccezione
+        # assegnazione del percorso del file in input
         self.percorso_file = percorso_file
 
-        # matrice che ospiterà il labirinto
+        # lista di liste (assimilabile a una matrice) che ospiterà il labirinto
         self.maze = []
         # lista che ospiterà i punti di partenza
         self.start = []
         # tupla che ospita il punto di arrivo
         self.end = ()
-        # immagine che conterrà l'immagine del labirinto
+        # immagine che conterrà l'immagine del labirinto,
+        # utile soprattutto se input è un JSON
         self.image = None
 
     def gestisci_input(self):
 
         """
-        Metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che dal json mi crea una istanza del labirinto,
-        se il file è di tipo immagine allora dovrò chiamare un metodo che crea un'istanza del labirinto a partire dall'immagine.
-        :return: self.maze : labirinto in matrice, self.percorso_file : rappresenta il percorso del file contenente la rappresentazione del labirinto, self.start : lista delle posizioni iniziali, self.end : posizione finale
+
+        Metodo per il parsing dell'input: se il file è .json allora dovrò chiamare una funzione che
+        dal json mi crea una istanza del labirinto,
+        se il file è di tipo immagine allora dovrò chiamare un metodo che
+        crea un'istanza del labirinto a partire dall'immagine.
+
+        :return:
+        self.maze : labirinto in matrice,
+        self.percorso_file : rappresenta il percorso del file contenente la rappresentazione del labirinto,
+        self.start : lista delle posizioni iniziali,
+        self.end : posizione finale
         """
 
         # Ottengo il nome del file e la sua estensione
@@ -61,10 +74,12 @@ class Labirinto:
         return self.maze, self.percorso_file, self.start, self.end
 
     def labirinto_from_json(self, data):
+
         """
         Metodo per creare istanza del labirinto a partire dal file json di input
         :return:
         """
+
         # controllo che il JSON abbia i campi prestabiliti
         if set(list(data.keys())) != {"larghezza", "altezza", "pareti", "iniziali", "finale", "costi"}:
             raise ValueError("Struttura file JSON non supportata")
@@ -108,11 +123,14 @@ class Labirinto:
 
 
     def json_to_image(self):
+
         """
         Metodo per convertire la matrice del labirinto in un'immagine
         :return:
         """
-        # creazione di un'immagine vuota tramite Image, che abbia dimensione pari alla matrice che contiene il labirinto
+
+        # creazione di un'immagine vuota tramite Image,
+        # che abbia dimensione pari alla matrice che contiene il labirinto
         self.image = Image.new("RGB", (len(self.maze[0]), len(self.maze)))
         pixels = self.image.load()
         # Impostazione dei pixel dell'immagine in base alla matrice del labirinto
@@ -126,7 +144,8 @@ class Labirinto:
                     pixels[j, i] = (255, 255, 255)  # cammino = bianco
                 else:
                     # imposto il cammino pesato
-                    pixels[j, i] = ((self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16)  # cammino pesato = grigio scuro
+                    # cammino pesato = grigio scuro
+                    pixels[j, i] = ((self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16, (self.maze[i][j] - 1) * 16)
         # imposto l'inizio e la fine del labirinto
         i = self.end[0]
         j = self.end[1]
@@ -138,10 +157,13 @@ class Labirinto:
 
 
     def labirinto_from_image(self):
+
         """
-        Metodo che consente di estrarre un labirinto rappresentato da un'immagine (in formato PNG, JPEG, etc.) e per ottenere una matrice del labirinto.
+        Metodo che consente di estrarre un labirinto rappresentato da un'immagine (in formato PNG, JPEG, etc.)
+        e per ottenere una matrice del labirinto.
         :return:
         """
+
         # apre l'immagine e ottiene i dati dei pixel
         pixel = self.image.load()
         larghezza, altezza = self.image.size
@@ -204,7 +226,10 @@ class Labirinto:
                         costo = 14
                     elif valore_grigio == 240:
                         costo = 15
+                    # gestione dell'errore nel caso in cui vi sia un grigio non aspettato
+                    # in tal caso il labirinto non è rappresentato correttamente
                     else:
                         raise ValueError("Valore di grigio non valido")
-                    labirinto[y][x] = costo + 1  # associazione del costo in base al grigio, assumendo che il grigio sia anche un corridoio
+                    # associazione del costo in base al grigio, assumendo che il grigio sia anche un corridoio
+                    labirinto[y][x] = costo + 1
         self.maze = labirinto
