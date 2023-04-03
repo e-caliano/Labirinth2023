@@ -151,23 +151,40 @@ class Labirinto:
 
 
     def labirinto_from_image(self):
-
         """
-        Metodo che consente di estrarre un labirinto rappresentato da un'immagine (nei vari formati)
-        e per ottenere una lista di liste del labirinto.
+        Metodo che consente di estrarre un labirinto rappresentato da un'immagine (in formato PNG, JPEG, etc.)
+        e per ottenere una matrice del labirinto.
         :return:
         """
-
         # apre l'immagine e ottiene i dati dei pixel
         pixel = self.image.load()
         larghezza, altezza = self.image.size
 
-        # inizializzo la lista di liste del labirinto
+        # inizializzo la matrice del labirinto
         labirinto = []
         for i in range(altezza):
             labirinto.append([0] * larghezza)
 
-        # analizzo i pixel dell'immagine e costruisco la lista di liste del labirinto
+        # dizionario di corrispondenza tra valore di grigio e costo
+        grigio_costo = {
+            16: 1,
+            32: 2,
+            48: 3,
+            64: 4,
+            80: 5,
+            96: 6,
+            112: 7,
+            128: 8,
+            144: 9,
+            160: 10,
+            176: 11,
+            192: 12,
+            208: 13,
+            224: 14,
+            240: 15
+        }
+
+        # analizzo i pixel dell'immagine e costruisco la matrice del labirinto
         for y in range(altezza):
             for x in range(larghezza):
                 r, g, b = pixel[x, y]
@@ -187,43 +204,12 @@ class Labirinto:
                     labirinto[y][x] = 1
                 # pixel grigio = casella con costo
                 else:
-                    # determina il valore del pixel in scala di grigi
+                    # determino il valore del pixel in scala di grigi
                     valore_grigio = int(round(0.2989 * r + 0.5870 * g + 0.1140 * b))
-                    # determina il costo associato al valore del pixel
-                    if valore_grigio == 16:
-                        costo = 1
-                    elif valore_grigio == 32:
-                        costo = 2
-                    elif valore_grigio == 48:
-                        costo = 3
-                    elif valore_grigio == 64:
-                        costo = 4
-                    elif valore_grigio == 80:
-                        costo = 5
-                    elif valore_grigio == 96:
-                        costo = 6
-                    elif valore_grigio == 112:
-                        costo = 7
-                    elif valore_grigio == 128:
-                        costo = 8
-                    elif valore_grigio == 144:
-                        costo = 9
-                    elif valore_grigio == 160:
-                        costo = 10
-                    elif valore_grigio == 176:
-                        costo = 11
-                    elif valore_grigio == 192:
-                        costo = 12
-                    elif valore_grigio == 208:
-                        costo = 13
-                    elif valore_grigio == 224:
-                        costo = 14
-                    elif valore_grigio == 240:
-                        costo = 15
-                    # gestione dell'errore nel caso in cui vi sia un grigio non aspettato
-                    # in tal caso il labirinto non è rappresentato correttamente
+                    # determino il costo associato al valore del pixel
+                    if valore_grigio in grigio_costo:
+                        costo = grigio_costo[valore_grigio]
                     else:
                         raise ValueError("Valore di grigio non valido")
-                    # associazione del costo in base al grigio, assumendo che il grigio sia anche un corridoio
                     labirinto[y][x] = costo + 1
         self.maze = labirinto
