@@ -17,8 +17,7 @@ class Labirinto:
 
         # se il file non esiste verrà sollevata un'eccezione
         self.percorso_file = percorso_file
-        if not os.path.exists(self.percorso_file):
-            raise FileNotFoundError(f"File non trovato: {self.percorso_file}")
+
         # matrice che ospiterà il labirinto
         self.maze = []
         # lista che ospiterà i punti di partenza
@@ -57,7 +56,7 @@ class Labirinto:
         # in tutti gli altri casi non devo supportare l'estensione
         else:
             # gestione dell'errore se l'estensione non è supportata
-            print("Estensione del file non supportata")
+            raise ValueError("Estensione del file non supportata")
 
         return self.maze, self.percorso_file, self.start, self.end
 
